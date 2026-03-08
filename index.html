@@ -18,7 +18,7 @@ background:radial-gradient(circle at 20% 20%,#1a1a40,#07071a 60%);
 color:white;
 }
 
-/* Floating particles */
+/* floating particles */
 
 .particle{
 position:absolute;
@@ -34,7 +34,7 @@ from{transform:translateY(100vh)}
 to{transform:translateY(-10vh)}
 }
 
-/* Crescent moon */
+/* crescent moon */
 
 .moon{
 position:absolute;
@@ -58,7 +58,7 @@ background:#07071a;
 border-radius:50%;
 }
 
-/* Glass card */
+/* glass card */
 
 .card{
 position:relative;
@@ -72,7 +72,7 @@ border:1px solid rgba(255,255,255,0.1);
 box-shadow:0 20px 80px rgba(0,0,0,0.6);
 }
 
-/* Aurora gradient text */
+/* aurora gradient text */
 
 h1{
 font-size:58px;
@@ -96,10 +96,9 @@ font-size:20px;
 opacity:0.85;
 }
 
-/* Button */
+/* button */
 
 button{
-
 margin-top:30px;
 padding:14px 40px;
 border-radius:40px;
@@ -119,7 +118,7 @@ button:hover{
 transform:translateY(-4px) scale(1.05);
 }
 
-/* Hidden message */
+/* hidden message */
 
 #msg{
 margin-top:25px;
@@ -129,20 +128,7 @@ transition:1s;
 line-height:1.6;
 }
 
-/* Money */
-
-.money{
-position:absolute;
-font-size:28px;
-animation:money 6s linear infinite;
-}
-
-@keyframes money{
-0%{transform:translateY(-100px)}
-100%{transform:translateY(110vh)}
-}
-
-/* Fireworks */
+/* fireworks */
 
 .firework{
 position:absolute;
@@ -176,11 +162,11 @@ May this Eid bring peace, joy, and beautiful moments into your life.
 
 <div id="msg">
 
-✨ Your Eidi has been successfully unlocked 💰  
+✨ Your Eidi has been unlocked  
 
 <br><br>
 
-Wishing you endless happiness and blessings.
+Wishing you happiness and countless blessings.
 
 <br><br>
 
@@ -206,32 +192,16 @@ document.body.appendChild(p);
 
 }
 
-/* unlock animation */
+/* unlock */
 
 function unlock(){
 
 document.getElementById("msg").style.opacity="1";
-
-money();
 fireworks();
 
 }
 
-function money(){
-
-for(let i=0;i<20;i++){
-
-let m=document.createElement("div");
-m.className="money";
-m.innerHTML="💸";
-
-m.style.left=Math.random()*100+"vw";
-
-document.body.appendChild(m);
-
-}
-
-}
+/* fireworks */
 
 function fireworks(){
 
