@@ -1,29 +1,275 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Eid Protocol</title>
+<meta charset="UTF-8">
+<title>Eid Experience</title>
+
 <style>
+
 body{
-    background:black;
-    color:#00ff90;
-    font-family:monospace;
-    text-align:center;
-    padding-top:100px;
+margin:0;
+height:100vh;
+font-family:'Segoe UI',sans-serif;
+color:white;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+background:radial-gradient(circle at bottom,#020111 0%,#000 100%);
 }
+
+/* STARFIELD */
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+opacity:0.8;
+animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2}
+to{opacity:1}
+}
+
+/* MOON */
+
+.moon{
+position:absolute;
+top:80px;
+right:120px;
+width:120px;
+height:120px;
+border-radius:50%;
+background:white;
+box-shadow:0 0 40px white;
+}
+
+.crescent{
+position:absolute;
+top:80px;
+right:110px;
+width:120px;
+height:120px;
+border-radius:50%;
+background:#020111;
+}
+
+/* CARD */
+
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(25px);
+padding:50px;
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,255,255,0.3);
+text-align:center;
+z-index:10;
+animation:fadeIn 2s;
+}
+
+h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+p{
+opacity:0.9;
+font-size:18px;
+}
+
+button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+background:gold;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* MESSAGE */
+
+#message{
+margin-top:20px;
+font-size:20px;
+opacity:0;
+transition:1s;
+}
+
+/* CONFETTI */
+
+.confetti{
+position:absolute;
+width:8px;
+height:8px;
+animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px)}
+100%{transform:translateY(110vh)}
+}
+
+/* MONEY */
+
+.money{
+position:absolute;
+font-size:24px;
+animation:moneyFall 5s linear infinite;
+}
+
+@keyframes moneyFall{
+0%{transform:translateY(-100px)}
+100%{transform:translateY(110vh)}
+}
+
+/* FIREWORK */
+
+.firework{
+position:absolute;
+width:6px;
+height:6px;
+border-radius:50%;
+background:white;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(1)}
+100%{transform:scale(8); opacity:0}
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px)}
+to{opacity:1; transform:translateY(0)}
+}
+
 </style>
 </head>
 
 <body>
 
-<h2>Initializing Eid Protocol...</h2>
+<div class="moon"></div>
+<div class="crescent"></div>
 
-<p id="msg"></p>
+<div class="card">
+
+<h1>🌙 Eid Mubarak</h1>
+
+<p>
+May this beautiful Eid bring peace, happiness, and countless blessings to your life.
+</p>
+
+<button onclick="unlock()">Unlock Your Eidi</button>
+
+<div id="message">
+
+✨ Surprise! Your Eidi is waiting inside the envelope 💰  
+<br><br>
+With love,<br>
+<b>Ador ❤️</b>
+
+</div>
+
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c1b4fdcd0.mp3">
+</audio>
 
 <script>
-setTimeout(() => {
-document.getElementById("msg").innerHTML =
-"✨ Eid Mubarak! <br> Your Eidi has been successfully unlocked 💰 <br><br> — From Ador :)";
-}, 2000);
+
+/* STARFIELD */
+
+for(let i=0;i<120;i++){
+
+let star=document.createElement("div");
+star.className="star";
+
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+star.style.animationDuration=(Math.random()*3+2)+"s";
+
+document.body.appendChild(star);
+
+}
+
+/* UNLOCK */
+
+function unlock(){
+
+document.getElementById("message").style.opacity="1";
+document.getElementById("music").play();
+
+confetti();
+money();
+fireworks();
+
+}
+
+/* CONFETTI */
+
+function confetti(){
+
+for(let i=0;i<60;i++){
+
+let c=document.createElement("div");
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+
+document.body.appendChild(c);
+
+}
+
+}
+
+/* MONEY */
+
+function money(){
+
+for(let i=0;i<25;i++){
+
+let m=document.createElement("div");
+m.className="money";
+m.innerHTML="💸";
+
+m.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(m);
+
+}
+
+}
+
+/* FIREWORKS */
+
+function fireworks(){
+
+for(let i=0;i<12;i++){
+
+let f=document.createElement("div");
+f.className="firework";
+
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*50+"vh";
+f.style.background=`hsl(${Math.random()*360},100%,50%)`;
+
+document.body.appendChild(f);
+
+}
+
+}
+
 </script>
 
 </body>
