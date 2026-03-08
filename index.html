@@ -2,155 +2,159 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Eid Surprise</title>
+<title>Eid Experience</title>
 
 <style>
 
 body{
 margin:0;
 height:100vh;
-font-family:'Segoe UI',sans-serif;
-color:white;
-overflow:hidden;
+font-family:Inter,system-ui;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364,#1a2a6c);
+overflow:hidden;
+background:radial-gradient(circle at 20% 20%,#1a1a40,#07071a 60%);
+color:white;
 }
 
-/* STARFIELD */
+/* Floating particles */
 
-.star{
+.particle{
 position:absolute;
-width:3px;
-height:3px;
-background:white;
+width:4px;
+height:4px;
 border-radius:50%;
-animation:twinkle 3s infinite alternate;
+background:rgba(255,255,255,0.6);
+animation:float 10s linear infinite;
 }
 
-@keyframes twinkle{
-from{opacity:0.2}
-to{opacity:1}
+@keyframes float{
+from{transform:translateY(100vh)}
+to{transform:translateY(-10vh)}
 }
 
-/* MOON */
+/* Crescent moon */
 
 .moon{
 position:absolute;
-top:70px;
-right:100px;
+top:80px;
+right:120px;
 width:140px;
 height:140px;
 border-radius:50%;
-background:radial-gradient(circle,#fff,#ddd,#aaa);
-box-shadow:0 0 60px white;
+background:radial-gradient(circle,#ffffff,#d4d4ff);
+box-shadow:0 0 60px rgba(255,255,255,0.6);
 }
 
-/* CARD */
+.moon:after{
+content:"";
+position:absolute;
+left:35px;
+top:0;
+width:140px;
+height:140px;
+background:#07071a;
+border-radius:50%;
+}
+
+/* Glass card */
 
 .card{
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(25px);
+position:relative;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(30px);
 padding:60px;
-border-radius:25px;
-box-shadow:0 0 60px rgba(255,255,255,0.4);
+border-radius:24px;
+width:420px;
 text-align:center;
-z-index:10;
-max-width:500px;
+border:1px solid rgba(255,255,255,0.1);
+box-shadow:0 20px 80px rgba(0,0,0,0.6);
 }
 
-/* BIG COLORFUL TITLE */
+/* Aurora gradient text */
 
 h1{
-font-size:56px;
-margin-bottom:15px;
-background:linear-gradient(45deg,#ffdd00,#ff7e5f,#ff4e50,#f9d423);
+font-size:58px;
+margin:0 0 20px 0;
+
+background:linear-gradient(90deg,#7afcff,#feff9c,#ff65a3,#7afcff);
+background-size:300%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:glow 2s infinite alternate;
+
+animation:gradientMove 6s infinite linear;
 }
 
-@keyframes glow{
-from{filter:drop-shadow(0 0 5px gold)}
-to{filter:drop-shadow(0 0 20px orange)}
+@keyframes gradientMove{
+0%{background-position:0%}
+100%{background-position:300%}
 }
-
-/* MESSAGE TEXT */
 
 p{
-font-size:22px;
-opacity:0.95;
+font-size:20px;
+opacity:0.85;
 }
 
-/* BUTTON */
+/* Button */
 
 button{
+
 margin-top:30px;
-padding:16px 40px;
-border:none;
+padding:14px 40px;
 border-radius:40px;
-background:linear-gradient(45deg,#ff512f,#f09819);
-font-size:20px;
+border:none;
+font-size:18px;
+
+background:linear-gradient(135deg,#6a11cb,#2575fc);
 color:white;
+
 cursor:pointer;
-transition:0.3s;
+transition:0.4s;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
 button:hover{
-transform:scale(1.1);
+transform:translateY(-4px) scale(1.05);
 }
 
-/* HIDDEN MESSAGE */
+/* Hidden message */
 
-#message{
+#msg{
 margin-top:25px;
-font-size:24px;
+font-size:22px;
 opacity:0;
 transition:1s;
 line-height:1.6;
 }
 
-/* CONFETTI */
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-animation:fall 4s linear infinite;
-}
-
-@keyframes fall{
-0%{transform:translateY(-100px)}
-100%{transform:translateY(110vh)}
-}
-
-/* MONEY */
+/* Money */
 
 .money{
 position:absolute;
 font-size:28px;
-animation:moneyFall 5s linear infinite;
+animation:money 6s linear infinite;
 }
 
-@keyframes moneyFall{
+@keyframes money{
 0%{transform:translateY(-100px)}
 100%{transform:translateY(110vh)}
 }
 
-/* FIREWORK */
+/* Fireworks */
 
 .firework{
 position:absolute;
-width:8px;
-height:8px;
+width:6px;
+height:6px;
 border-radius:50%;
 animation:explode 1s ease-out forwards;
 }
 
 @keyframes explode{
 0%{transform:scale(1)}
-100%{transform:scale(10); opacity:0}
+100%{transform:scale(12); opacity:0}
 }
 
 </style>
@@ -162,87 +166,60 @@ animation:explode 1s ease-out forwards;
 
 <div class="card">
 
-<h1>🌙 Eid Mubarak</h1>
+<h1>Eid Mubarak</h1>
 
 <p>
-May your Eid shine with joy, love, and beautiful moments.
+May this Eid bring peace, joy, and beautiful moments into your life.
 </p>
 
-<button onclick="unlock()">✨ Unlock Your Eidi</button>
+<button onclick="unlock()">Unlock Your Eidi</button>
 
-<div id="message">
+<div id="msg">
 
-🎉 Surprise! Your Eidi is waiting inside the envelope 💰  
-
-<br><br>
-
-Wishing you happiness, laughter, and endless blessings.
+✨ Your Eidi has been successfully unlocked 💰  
 
 <br><br>
 
-❤️ From <b>Ador</b>
+Wishing you endless happiness and blessings.
+
+<br><br>
+
+— Ador ❤️
 
 </div>
 
 </div>
-
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c1b4fdcd0.mp3">
-</audio>
 
 <script>
 
-/* STARS */
+/* particles */
 
-for(let i=0;i<150;i++){
+for(let i=0;i<80;i++){
 
-let star=document.createElement("div");
-star.className="star";
+let p=document.createElement("div");
+p.className="particle";
 
-star.style.left=Math.random()*100+"vw";
-star.style.top=Math.random()*100+"vh";
-star.style.animationDuration=(Math.random()*3+2)+"s";
+p.style.left=Math.random()*100+"vw";
+p.style.animationDuration=(Math.random()*8+6)+"s";
 
-document.body.appendChild(star);
+document.body.appendChild(p);
 
 }
 
-/* UNLOCK */
+/* unlock animation */
 
 function unlock(){
 
-document.getElementById("message").style.opacity="1";
-document.getElementById("music").play();
+document.getElementById("msg").style.opacity="1";
 
-confetti();
 money();
 fireworks();
 
 }
 
-/* CONFETTI */
-
-function confetti(){
-
-for(let i=0;i<80;i++){
-
-let c=document.createElement("div");
-c.className="confetti";
-
-c.style.left=Math.random()*100+"vw";
-c.style.background=`hsl(${Math.random()*360},100%,50%)`;
-
-document.body.appendChild(c);
-
-}
-
-}
-
-/* MONEY RAIN */
-
 function money(){
 
-for(let i=0;i<30;i++){
+for(let i=0;i<20;i++){
 
 let m=document.createElement("div");
 m.className="money";
@@ -256,17 +233,16 @@ document.body.appendChild(m);
 
 }
 
-/* FIREWORKS */
-
 function fireworks(){
 
-for(let i=0;i<15;i++){
+for(let i=0;i<10;i++){
 
 let f=document.createElement("div");
 f.className="firework";
 
 f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*50+"vh";
+f.style.top=Math.random()*60+"vh";
+
 f.style.background=`hsl(${Math.random()*360},100%,60%)`;
 
 document.body.appendChild(f);
