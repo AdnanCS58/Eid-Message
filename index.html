@@ -18,7 +18,7 @@ background:radial-gradient(circle at 20% 20%,#1a1a40,#07071a 60%);
 color:white;
 }
 
-/* floating particles */
+/* particles */
 
 .particle{
 position:absolute;
@@ -34,7 +34,7 @@ from{transform:translateY(100vh)}
 to{transform:translateY(-10vh)}
 }
 
-/* crescent moon */
+/* moon */
 
 .moon{
 position:absolute;
@@ -58,10 +58,9 @@ background:#07071a;
 border-radius:50%;
 }
 
-/* glass card */
+/* card */
 
 .card{
-position:relative;
 background:rgba(255,255,255,0.06);
 backdrop-filter:blur(30px);
 padding:60px;
@@ -72,11 +71,10 @@ border:1px solid rgba(255,255,255,0.1);
 box-shadow:0 20px 80px rgba(0,0,0,0.6);
 }
 
-/* aurora gradient text */
+/* title */
 
 h1{
 font-size:78px;
-margin:0 0 20px 0;
 
 background:linear-gradient(90deg,#7afcff,#feff9c,#ff65a3,#7afcff);
 background-size:400%;
@@ -92,55 +90,60 @@ animation:gradientMove 6s infinite linear;
 }
 
 p{
-font-size:30px;
-opacity:0.85;
+font-size:26px;
 }
 
-/* button */
+/* task buttons */
 
-button{
-margin-top:30px;
-padding:14px 40px;
-border-radius:40px;
+.task{
+display:block;
+margin:10px auto;
+padding:12px 20px;
+font-size:22px;
+border-radius:20px;
 border:none;
-font-size:28px;
-
+cursor:pointer;
 background:linear-gradient(135deg,#6a11cb,#2575fc);
 color:white;
+transition:0.3s;
+}
 
+.task:hover{
+transform:scale(1.05);
+}
+
+/* code input */
+
+#codeBox{
+margin-top:20px;
+display:none;
+}
+
+input{
+padding:10px;
+font-size:20px;
+border-radius:10px;
+border:none;
+}
+
+.unlockBtn{
+padding:10px 20px;
+font-size:20px;
+margin-left:10px;
+border:none;
+border-radius:10px;
+background:#00c853;
+color:white;
 cursor:pointer;
-transition:0.4s;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-button:hover{
-transform:translateY(-4px) scale(1.05);
-}
-
-/* hidden message */
+/* final message */
 
 #msg{
-margin-top:25px;
-font-size:32px;
+margin-top:30px;
+font-size:30px;
 opacity:0;
 transition:1s;
-line-height:1.6;
-}
-
-/* fireworks */
-
-.firework{
-position:absolute;
-width:6px;
-height:6px;
-border-radius:50%;
-animation:explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-0%{transform:scale(1)}
-100%{transform:scale(12); opacity:0}
 }
 
 </style>
@@ -154,19 +157,34 @@ animation:explode 1s ease-out forwards;
 
 <h1>Eid Mubarak</h1>
 
-<p>
-May this Eid bring peace, joy, and beautiful moments into your life.
-</p>
+<p>Choose a task to unlock your Eidi</p>
 
-<button onclick="unlock()">Unlock Your Eidi</button>
+<button class="task" onclick="chooseTask('Dance for 10 seconds')">💃 Dance for 10 seconds</button>
+<button class="task" onclick="chooseTask('Sing an Eid song')">🎤 Sing an Eid song</button>
+<button class="task" onclick="chooseTask('Say 3 compliments to Ador')">😄 Say 3 compliments to Ador</button>
+<button class="task" onclick="chooseTask('Feed Ador something sweet')">🍬 Feed Ador something sweet</button>
+<button class="task" onclick="chooseTask('Tell a funny joke')">😂 Tell a funny joke</button>
+<button class="task" onclick="chooseTask('Give a high five')">✋ Give a high five</button>
+
+<div id="selectedTask"></div>
+
+<div id="codeBox">
+
+<p>Task completed? Enter the secret code</p>
+
+<input id="codeInput" placeholder="Enter code">
+
+<button class="unlockBtn" onclick="checkCode()">Unlock</button>
+
+</div>
 
 <div id="msg">
 
-✨ Your Eidi has been unlocked  
+✨ Eidi Unlocked ✨
 
 <br><br>
 
-Wishing you happiness and countless blessings.
+May your Eid be filled with joy, blessings, and endless happiness.
 
 <br><br>
 
@@ -178,7 +196,7 @@ Wishing you happiness and countless blessings.
 
 <script>
 
-/* particles */
+/* floating particles */
 
 for(let i=0;i<80;i++){
 
@@ -192,30 +210,30 @@ document.body.appendChild(p);
 
 }
 
-/* unlock */
+function chooseTask(task){
 
-function unlock(){
+document.getElementById("selectedTask").innerHTML=
+"<p>Task Selected: <b>"+task+"</b></p>";
 
-document.getElementById("msg").style.opacity="1";
-fireworks();
+document.getElementById("codeBox").style.display="block";
 
 }
 
-/* fireworks */
+/* secret code */
 
-function fireworks(){
+const secretCode="EIDI2026";
 
-for(let i=0;i<10;i++){
+function checkCode(){
 
-let f=document.createElement("div");
-f.className="firework";
+let entered=document.getElementById("codeInput").value;
 
-f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*60+"vh";
+if(entered===secretCode){
 
-f.style.background=`hsl(${Math.random()*360},100%,60%)`;
+document.getElementById("msg").style.opacity="1";
 
-document.body.appendChild(f);
+}else{
+
+alert("Wrong code 😅");
 
 }
 
